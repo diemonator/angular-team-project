@@ -1,5 +1,23 @@
-<p>This is the partial for view 3.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<html>
+<body>
+
+<script src="view3.js"></script>
+
+
+<p>this is the list for tasks</p>
+
+
+<div ng-app="myApp.Write3" ng-controller="Write3Ctrl">
+
+  <li ng-repeat="task in tasks">
+    {{task.name}}
+  </li>
+
+</div>
+
+
+</body>
+</html>
+</body>
+
+</html>
