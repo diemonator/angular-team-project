@@ -1,1 +1,1 @@
-[Link](http://i367506.hera.fhict.nl/AngularJsGROUP/app/index.html)
+[Link](http://i359591.hera.fhict.nl/#!/view1)
