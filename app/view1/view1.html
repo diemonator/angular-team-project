@@ -1,14 +1,38 @@
-<p> Assignment 1 Deparments table</p>
+<p> Assignment 1 Departments table</p>
 <hr>
 
 <table>
 	<tr class="TopRo">
+        <td>Id</td>
 		<td>Name</td>
-	    <td>Headquarters</td>
+	    <td>Location</td>
+		<td>Option</td>
     </tr>
 	    <tr ng-repeat="department in departments" class="dpTable">
+            <td>{{department.Id}}</td>
         <td>{{department.Name}}</td>
-        <td>{{department.Headquarters}}</td>
+        <td>{{department.Location}}</td>
+
+            <td ng-controller="View1Ctrl">
+				<a href="#" ng-click="del(department.Id)">Delete</a>
+				<a href="#" ng-click="selectEdit(department.Id)">Edit</a>
+			</td>
+<br>
+            <table>
+                <tr>
+                    <td><input placeholder="Department id" type="text" ng-model="Id"></td>
+                </tr>
+                <tr>
+                    <input placeholder="Department name" type="text" ng-model="Name">
+                </tr>
+                <tr>
+                    <input placeholder="Department Location" type="text" ng-model="Location">
+                </tr>
+
+                <button type="submit" ng-click="add()"> Add new Department </button>
+                <button type="submit" ng-click="edit()"> Save </button>
+            </table>
+
 </table>
 
 <hr>

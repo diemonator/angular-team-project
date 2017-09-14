@@ -13,19 +13,59 @@ angular.module('myApp.view1', ['ngRoute'])
     $scope.departments = [
             {   
                 "Name":"Management",
-                "Headquarters":"New York City"
+                "Location":"NY.C"
             },
             {
                 "Name":"Sales",
-                "Headquarters":"Chicago",
+                "Location":"Chicago",
             },
             {
                 "Name":"Marketing",
-                "Headquarters":"Boston"
+                "Location":"Boston"
             },
             {
                 "Name":"IT",
-                "Headquarters":"Seattle"
+                "Location":"Ohio"
             }
         ];
+
+    $scope.selectEdit = function (Id) {
+        var index = getSelectedIndex(Id);
+        var department = $scope.departments[index];
+        $scope.id = department.Id;
+        $scope.name = department.Name;
+        $scope.location = department.Location;
+    };
+
+    function getSelectedIndex(Id) {
+        for (var i=0; i<$scope.departments.length; i++)
+            if ($scope.departments[i].Id === Id)
+                return i;
+        return -1;
+    }
+
+    $scope.add = function () {
+        $scope.departments.push({
+            "Id":$scope.Id ,
+            "Name":$scope.Name,
+            "Location":$scope.Location
+        });
+        $scope.Id = '';
+        $scope.Name = '';
+        $scope.Location = '';
+    };
+
+    $scope.edit = function () {
+        var index = getSelectedIndex(Id);
+        $scope.departments[index].Id = $scope.Id;
+        $scope.departments[index].Name = $scope.Name;
+        $scope.departments[index].Location = $scope.Location;
+    };
+
+    $scope.del = function (Id) {
+        var index = getSelectedIndex(Id);
+        alert(index);
+        $scope.departments.splice(index,1);
+    };
+
 }]);
