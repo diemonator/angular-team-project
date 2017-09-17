@@ -55,6 +55,7 @@ angular.module('myApp.view1', ['ngRoute'])
         $scope.Location = '';
     };
 
+
     $scope.edit = function () {
         var index = getSelectedIndex(Id);
         $scope.departments[index].Id = $scope.Id;
