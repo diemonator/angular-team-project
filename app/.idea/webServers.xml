@@ -10,9 +10,6 @@
           <option name="port" value="21" />
         </fileTransfer>
       </webServer>
-      <webServer id="f018a078-50d9-453d-b68f-879348bb82c2" name="Local" url="http://localhost:81/">
-        <fileTransfer port="0" mountedRoot="D:\Programs\WEB2-J.L\app" accessType="MOUNT" />
-      </webServer>
     </option>
   </component>
 </project>
