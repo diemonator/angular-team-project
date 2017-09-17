@@ -1,28 +1,129 @@
-<p>This is the partial for view 2.</p>
+<p>This is the partial for Employees.</p>
+
 <hr>
 
-<p>5 + 5 = {{5+5}}</p>
-<table>
-    <tr class="TopTR">
-        <td>Name</td>
-        <td>Occupation</td>
-        <td>State</td>
+<div class="container">
+
+  <div class="alert alert-info alert-dismissible" role="alert" ng-if="info">
+    <button type="button" class="close" aria-label="Close"><span aria-hidden="true" ng-click="clearInfo()">&times;</span></button>
+    {{info}}
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Employee</th>
+      <th>State</th>
+      <th>Occupation</th>
+      <th>Edit</th>
+      <th>Delete</th>
     </tr>
+    </thead>
+    <tbody>
     <tr ng-repeat="employee in employees">
-        <td>{{employee.Name}}</td>
-        <td>{{employee.Occupation}}</td>
-        <td>{{employee.State}}</td>
+      <td> {{ $index+1 }}.</td>
+      <td> {{employee.name}} </td>
+      <td>{{employee.occupation}}</td>
+      <td>{{employee.state}}</td>
+      <td> <button class="btn btn-info btn-sm"  type="button" data-toggle="modal" data-target="#myModalEdit" ng-click="selectEmployee(employee)">Edit</button> </td>
+      <td> <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#myModalDelete" data-dismiss="modal" ng-click="deleteEmployee(selectEmployee(employee))">Delete</button> </td>
     </tr>
-</table>
-<br>
-<form>
-    <input placeholder="Name" type="text" ng-model="inputText">
-    <input placeholder="Occupation" type="text" ng-model="inputText">
-    <input placeholder="State" type="text" ng-model="inputText">
-    <button type="submit"> Add new Department </button>
-</form>
+    </tbody>
+  </table>
+</div>
 
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
 
+        <h4 class="modal-title">New Employee</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="inputs" class="col-sm-2 control-label">Employee Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputs" ng-model="newEmployee.name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputs" class="col-sm-2 control-label">Location</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputs" ng-model="newEmployee.occupation">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputs" class="col-sm-2 control-label">State</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputs" ng-model="newEmployee.state">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="saveEmployee();">Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="myModalEdit" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit This Employee</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="inputs" class="col-sm-2 control-label">Employee Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputs" ng-model="clickedEmployee.name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputs" class="col-sm-2 control-label">Location</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputs" ng-model="clickedEmployee.occupation">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputs" class="col-sm-2 control-label">State</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputs" ng-model="clickedEmployee.state">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <hr>
 <p>
