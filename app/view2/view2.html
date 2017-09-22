@@ -13,20 +13,17 @@
     <tr>
       <th>Id</th>
       <th>Employee</th>
-      <th>State</th>
-      <th>Occupation</th>
+      <th>Department</th>
       <th>Edit</th>
-      <th>Delete</th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="employee in employees">
-      <td> {{ $index+1 }}.</td>
+      <td> {{ employee.id }}.</td>
       <td> {{employee.name}} </td>
-      <td>{{employee.occupation}}</td>
-      <td>{{employee.state}}</td>
-      <td> <button class="btn btn-info btn-sm"  type="button" data-toggle="modal" data-target="#myModalEdit" ng-click="selectEmployee(employee)">Edit</button> </td>
-      <td> <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#myModalDelete" data-dismiss="modal" ng-click="deleteEmployee(selectEmployee(employee))">Delete</button> </td>
+      <td>{{employee.department}}</td>
+      <td> <button class="btn btn-info btn-sm"  type="button" data-toggle="modal" data-target="#myModalEdit" ng-click="selectEmployee(employee)">Edit</button>
+      <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#myModalDelete" data-dismiss="modal" ng-click="deleteEmployee(selectEmployee(employee))">Delete</button> </td>
     </tr>
     </tbody>
   </table>
@@ -49,18 +46,12 @@
           </div>
 
           <div class="form-group">
-            <label for="inputs" class="col-sm-2 control-label">Location</label>
+            <label for="inputs" class="col-sm-2 control-label">Department</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputs" ng-model="newEmployee.occupation">
+              <input type="text" class="form-control" id="inputs" ng-model="newEmployee.department">
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="inputs" class="col-sm-2 control-label">State</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputs" ng-model="newEmployee.state">
-            </div>
-          </div>
 
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
@@ -98,14 +89,7 @@
           <div class="form-group">
             <label for="inputs" class="col-sm-2 control-label">Location</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputs" ng-model="clickedEmployee.occupation">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="inputs" class="col-sm-2 control-label">State</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputs" ng-model="clickedEmployee.state">
+              <input type="text" class="form-control" id="inputs" ng-model="clickedEmployee.department">
             </div>
           </div>
 
@@ -115,10 +99,6 @@
             </div>
           </div>
         </form>
-      </div>
-      <div class="modal-footer">
-
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
 

@@ -9,24 +9,41 @@ angular.module('myApp.view2', ['ngRoute'])
         });
     }])
 
-    .controller('View2Ctrl', [ '$scope', function($scope) {
+    .factory('myFactory2', function departments (){
+        var id = 1;
+        var obj = {};
+        obj.data = [
+            {"name":"John Doe", "department":"IT", "id":ids()},
+            {"name":"Catelyn Jones", "department":"HRM", "id":ids()},
+            {"name":"Tyler Lee", "department":"Accounting", "id":ids()},
+            {"name":"Peter Smith", "department":"Marketing", "id":ids()},
+            {"name":"Jack Spiker", "department":"Legal Affairs", "id":ids()}];
+        return obj;
 
-        $scope.employees = [
-            {"name":"John Doe", "occupation":"Developer", "state":"Ohio"},
-            {"name":"Catelyn Jones", "occupation":"Secretary", "state":"Indiana"},
-            {"name":"Tyler Lee", "occupation":"Manager", "state":"Washington"},
-            {"name":"Peter Smith", "occupation":"CEO", "state":"New York"},
-            {"name":"Jack Spiker", "occupation":"Lawyer", "state":"California"}
-        ];
+        function ids() {
+            return id++;
+        }
+    })
+
+    .controller('View2Ctrl', [ '$scope','myFactory2', function($scope,myFactory2) {
+
+        $scope.employees = myFactory2.data;
 
         $scope.newEmployee = {};
         $scope.info = "";
 
         $scope.saveEmployee = function(){
+            if ($scope.newEmployee.name !== undefined && $scope.newEmployee.department!== undefined)
+            {
+                $scope.newEmployee.id = $scope.employees.length+1;
             console.log("Saving...");
             $scope.employees.push($scope.newEmployee);
             $scope.info = "New Employee Added Successfully!";
             $scope.newEmployee = {};
+            }
+            else {
+                alert("Try again!");
+            }
         };
 
         $scope.selectEmployee = function(emp){

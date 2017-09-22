@@ -9,23 +9,34 @@ angular.module('myApp.view3', ['ngRoute'])
         });
     }])
 
-    .controller('View3Ctrl', [ '$scope', function($scope) {
+    .factory('myFactory3', function departments (){
+        var obj = {};
+        obj.data = [
+            {"emp":"John Doe", "department":"IT", "task":"Make JS", "deadline":"21.12.2018"},
+            {"emp":"Catelyn Jones", "department":"HRM", "task":"Give checks","deadline":"21.12.2018"},
+            {"emp":"Tyler Lee", "department":"Accounting", "task":"Manage","deadline":"21.12.2018"},
+            {"emp":"Peter Smith", "department":"Marketing", "task":"Coordinate","deadline":"21.12.2018"},
+            {"emp":"Jack Spiker", "department":"Legal Affairs", "task":"I sue u","deadline":"21.12.2018"}];
+        return obj;
+    })
 
-        $scope.tasks = [
-            {"description":"Clean the kitchen", "completed":"Yes"},
-            {"description":"Clean the living room", "completed":"No"},
-            {"description":"Clean the room", "completed":"No"},
-            {"description":"Do the WEB2 homework", "completed":"Yes"}
-        ];
+    .controller('View3Ctrl', [ '$scope','myFactory3', function($scope,myFactory3) {
+
+        $scope.tasks = myFactory3.data;
 
         $scope.newTask = {};
         $scope.info = "";
 
         $scope.saveTask = function(){
+            if ($scope.newTask.emp !== undefined && $scope.newTask.department!== undefined && $scope.newTask.task!==undefined)
+            {
             console.log("Saving...");
             $scope.tasks.push($scope.newTask);
             $scope.info = "New Task Added Successfully!";
-            $scope.newTask = {};
+            $scope.newTask = {};}
+            else {
+                alert("Try Again!");
+            }
         };
 
         $scope.selectTask = function(task){
