@@ -11,12 +11,29 @@ angular.module('myApp.view3', ['ngRoute'])
 
     .factory('myFactory3', function departments (){
         var obj = {};
+        var result = JSON.parse(localStorage.getItem("tasks"));
+
+
+//if there are no items in local storage departments then we have to populate
+        if(result!=null)
+        {
+            obj.data = JSON.parse(localStorage.getItem("tasks"));
+            console.log('IF SUCCEEDED');
+        }
+        else
+        {
         obj.data = [
             {"emp":"John Doe", "department":"IT", "task":"Make JS", "deadline":"21.12.2018"},
             {"emp":"Catelyn Jones", "department":"HRM", "task":"Give checks","deadline":"21.12.2018"},
             {"emp":"Tyler Lee", "department":"Accounting", "task":"Manage","deadline":"21.12.2018"},
             {"emp":"Peter Smith", "department":"Marketing", "task":"Coordinate","deadline":"21.12.2018"},
             {"emp":"Jack Spiker", "department":"Legal Affairs", "task":"I sue u","deadline":"21.12.2018"}];
+            var temp = obj.data;
+
+            localStorage.setItem("tasks",JSON.stringify(temp));
+            console.log("if didnt succeed");
+
+        }
         return obj;
     })
 
@@ -33,7 +50,9 @@ angular.module('myApp.view3', ['ngRoute'])
             console.log("Saving...");
             $scope.tasks.push($scope.newTask);
             $scope.info = "New Task Added Successfully!";
-            $scope.newTask = {};}
+            $scope.newTask = {};
+                SaveTasks($scope);
+            }
             else {
                 alert("Try Again!");
             }
@@ -47,10 +66,17 @@ angular.module('myApp.view3', ['ngRoute'])
             console.log($scope.tasks.indexOf($scope.clickedTask));
             $scope.tasks.splice($scope.tasks.indexOf($scope.clickedTask), 1);
             $scope.info = "Task Deleted Successfully!";
+            SaveTasks($scope);
         };
 
         $scope.clearInfo = function(){
             $scope.info = "";
         };
+
+
+        function SaveTasks($scope) {
+
+            localStorage.setItem("tasks",JSON.stringify($scope.tasks));
+        }
 
     }]);

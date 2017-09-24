@@ -19,7 +19,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="task in tasks">
+    <tr ng-repeat="task in tasks track by $index">
       <td> {{ $index+1 }}.</td>
       <td> {{task.task}} </td>
       <td>{{task.emp}}</td>

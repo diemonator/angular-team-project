@@ -12,18 +12,39 @@ angular.module('myApp.view2', ['ngRoute'])
     .factory('myFactory2', function departments (){
         var id = 1;
         var obj = {};
-        obj.data = [
-            {"name":"John Doe", "department":"IT", "id":ids()},
-            {"name":"Catelyn Jones", "department":"HRM", "id":ids()},
-            {"name":"Tyler Lee", "department":"Accounting", "id":ids()},
-            {"name":"Peter Smith", "department":"Marketing", "id":ids()},
-            {"name":"Jack Spiker", "department":"Legal Affairs", "id":ids()}];
-        return obj;
+        var result = JSON.parse(localStorage.getItem("employees"));
 
-        function ids() {
-            return id++;
+
+//if there are no items in local storage departments then we have to populate
+        if(result!=null)
+        {
+            obj.data = JSON.parse(localStorage.getItem("employees"));
+            console.log('IF SUCCEEDED');
         }
+        else
+        {
+
+            obj.data = [
+                {"name": "John Doe", "department": "IT", "id": ids()},
+                {"name": "Catelyn Jones", "department": "HRM", "id": ids()},
+                {"name": "Tyler Lee", "department": "Accounting", "id": ids()},
+                {"name": "Peter Smith", "department": "Marketing", "id": ids()},
+                {"name": "Jack Spiker", "department": "Legal Affairs", "id": ids()}];
+
+            var temp = obj.data;
+
+            localStorage.setItem("employees", JSON.stringify(temp));
+            console.log("if didnt succeed");
+        }
+
+            return obj;
+
+            function ids() {
+                return id++;
+            }
+
     })
+
 
     .controller('View2Ctrl', [ '$scope','myFactory2', function($scope,myFactory2) {
 
@@ -40,6 +61,7 @@ angular.module('myApp.view2', ['ngRoute'])
             $scope.employees.push($scope.newEmployee);
             $scope.info = "New Employee Added Successfully!";
             $scope.newEmployee = {};
+                SaveEmployees($scope);
             }
             else {
                 alert("Try again!");
@@ -54,11 +76,18 @@ angular.module('myApp.view2', ['ngRoute'])
             console.log($scope.employees.indexOf($scope.clickedEmployee));
             $scope.employees.splice($scope.employees.indexOf($scope.clickedEmployee), 1);
             $scope.info = "Employee Deleted Successfully!";
+            SaveEmployees($scope);
         };
 
         $scope.clearInfo = function(){
             $scope.info = "";
         };
 
+
+
+        function SaveEmployees($scope) {
+
+            localStorage.setItem("employees",JSON.stringify($scope.employees));
+        }
 
     }]);

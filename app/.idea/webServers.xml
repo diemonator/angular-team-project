@@ -10,6 +10,9 @@
           <option name="port" value="21" />
         </fileTransfer>
       </webServer>
+      <webServer id="8b353774-8838-43ef-88ee-ad90fc9186ee" name="LocalConfig" url="">
+        <fileTransfer port="0" mountedRoot="D:\pdf\web2\app" accessType="MOUNT" />
+      </webServer>
     </option>
   </component>
 </project>

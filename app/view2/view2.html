@@ -18,7 +18,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="employee in employees">
+    <tr ng-repeat="employee in employees track by $index">
       <td> {{ employee.id }}.</td>
       <td> {{employee.name}} </td>
       <td>{{employee.department}}</td>
