@@ -45,6 +45,7 @@ angular.module('myApp.view1', ['ngRoute'])
         return obj;
     })
 
+
     .controller('View1Ctrl', [ '$scope','myFactory1', function($scope, myFactory1) {
         //$scope.saved = localStorage.getItem('save');
         var data = myFactory1.data;

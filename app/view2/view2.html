@@ -18,7 +18,19 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="employee in employees track by $index">
+
+    <div>
+      employees:
+      <div>
+        <input type="text" ng-model="filterValue"/>
+      </div>
+
+    </div>
+    <ul>
+
+    </ul>
+
+    <tr ng-repeat="employee in employees | filter: filterValue track by $index">
       <td> {{ employee.id }}.</td>
       <td> {{employee.name}} </td>
       <td>{{employee.department}}</td>
