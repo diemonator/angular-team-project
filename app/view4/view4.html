@@ -1,0 +1,28 @@
+<p> This is the partial for Departments </p>
+<hr>
+
+<div class="container">
+
+    <div class="alert alert-info alert-dismissible" role="alert" ng-if="info">
+        <button type="button" class="close" aria-label="Close"><span aria-hidden="true" ng-click="clearInfo()">&times;</span></button>
+        {{info}}
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Department</th>
+            <th>Task</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <!-- we use track by index to remove the dupes. dupes are duplucates in ng-repeat -->
+        <tr ng-repeat="info in infos">
+            <td ng-click="employeeShow($index)"> {{info.employee.name}}.</td>
+            <td ng-click="departmentShow($index)"> {{info.department.department}} </td>
+            <td ng-click="taskShow($index)"> {{info.task.task}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

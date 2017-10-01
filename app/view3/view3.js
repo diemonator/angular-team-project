@@ -31,7 +31,7 @@ angular.module('myApp.view3', ['ngRoute'])
             var temp = obj.data;
 
             localStorage.setItem("tasks",JSON.stringify(temp));
-            console.log("if didnt succeed");
+            console.log("if didn't succeed");
 
         }
         return obj;

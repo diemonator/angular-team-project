@@ -23,16 +23,16 @@ angular.module('myApp.view1', ['ngRoute'])
         else
         {
             obj.data = [
-                {"department":"IT", "location":"Ohio", "emp":"John Doe", },
-                {"department":"HRM", "location":"Indiana","emp":"Catelyn Jones"},
-                {"department":"Accounting", "location":"Washington","emp":"Tyler Lee"},
-                {"department":"Marketing", "location":"New York", "emp":"Peter Smith",},
-                {"department":"Legal Affairs", "location":"California", "emp":"Jack Spiker"}];
+                {"department":"IT", "location":"Ohio"  },
+                {"department":"HRM", "location":"Indiana"},
+                {"department":"Accounting", "location":"Washington"},
+                {"department":"Marketing", "location":"New York"},
+                {"department":"Legal Affairs", "location":"California"}];
 
             var temp = obj.data;
 
             localStorage.setItem("departments",JSON.stringify(temp));
-            console.log("if didnt succeed");
+            console.log("if didn't succeed");
 
         }
 
