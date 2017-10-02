@@ -8,64 +8,36 @@ angular.module('myApp.view1', ['ngRoute'])
         });
     }])
 
-    .factory('myFactory1',['myFactory2',function departments (myFactory2){
+    .factory('myFactory1',['myFactory2',function (myFactory2){
         var obj = {};
         var id = 0;
-
-        /*var result = JSON.parse(localStorage.getItem("departments"));
-
-
-
+        var result = JSON.parse(localStorage.getItem("departments"));
+        function ids() {
+            return id++;
+        }
         if(result!=null)
         {
             obj.data = JSON.parse(localStorage.getItem("departments"));
             console.log('IF SUCCEEDED');
         }
         else
-        {*/
+        {
             obj.data = [
                 { "department":"IT",            "location":"Ohio",       "depId":ids() },
                 { "department":"HRM",           "location":"Indiana",    "depId":ids() },
                 { "department":"Accounting",    "location":"Washington", "depId":ids() },
                 { "department":"Marketing",     "location":"New York",   "depId":ids() },
                 { "department":"Legal Affairs", "location":"California", "depId":ids() }];
-        var j =-1;
-        function newProp () {
-            j++;
-            return myFactory2.data[j].empName;
-        }
         var i;
         for (i=0;i<obj.data.length;i++)
         {
-            obj.data[i].emp = newProp();
+            obj.data[i].emp = myFactory2.data[i].empName;
         }
-
-        function ids() {
-            return id++;
-        }
-            /*var temp = obj.data;
-
-            localStorage.setItem("departments",JSON.stringify(temp));
+            localStorage.setItem("departments",JSON.stringify(obj.data));
             console.log("if didnt succeed");
-
-        }*/
-
+        }
         return obj;
     }])
-
-    /*.directive('myDirective1',function () {
-        return{
-            template:
-            "<tr>"
-            '<td> {{ $index+1 }}.</td>'
-        '<td> {{department.department}} </td>'
-        <td> {{department.emp}}</td>
-        <td>{{department.location}}</td>
-        <td> <button class="btn btn-info btn-sm"  type="button" data-toggle="modal" data-target="#myModalEdit" ng-click="selectDepartment(department)">Edit</button>
-            <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#myModalDelete" data-dismiss="modal" ng-click="deleteDepartment(selectDepartment(department))">Delete</button> </td>
-        </tr>
-        }
-    })*/
 
     .controller('View1Ctrl', [ '$scope','myFactory1', function($scope, myFactory1) {
         var data = myFactory1.data;

@@ -9,53 +9,34 @@ angular.module('myApp.view3', ['ngRoute'])
         });
     }])
 
-    .factory('myFactory3',['myFactory1','myFactory2', function departments (myFactory1,myFactory2){
+    .factory('myFactory3',['myFactory1','myFactory2', function (myFactory1,myFactory2){
         var obj = {};
         var id = 0;
         function ids() {
             return id++;
         }
-        var v = -1;
-        var j = -1;
-        function newDep () {
-            j++;
-            return myFactory1.data[j].department;
-        }
-        function newEmp () {
-            v++;
-            return myFactory2.data[v].empName;
-        }
-        /*var result = JSON.parse(localStorage.getItem("tasks"));
-
-
+        var result = JSON.parse(localStorage.getItem("tasks"));
         if(result!=null)
         {
             obj.data = JSON.parse(localStorage.getItem("tasks"));
             console.log('IF SUCCEEDED');
         }
-        else
-        {*/
-
-
-        obj.data = [
-            { "id":ids(), "task":"Make JS",     "deadline":"21.12.2018" },
-            { "id":ids(), "task":"Give checks", "deadline":"21.12.2018" },
-            { "id":ids(), "task":"Manage",      "deadline":"21.12.2018" },
-            { "id":ids(), "task":"Coordinate",  "deadline":"21.12.2018" },
-            { "id":ids(), "task":"I sue u",     "deadline":"21.12.2018" }];
-            var temp = obj.data;
-
-        var i;
-        for (i=0;i<obj.data.length;i++)
-        {
-            obj.data[i].dep = newDep();
-            obj.data[i].emp = newEmp()
-        }
-
-            localStorage.setItem("tasks",JSON.stringify(temp));
+        else {
+            obj.data = [
+                {"id": ids(), "task": "Make JS", "deadline": "21.12.2018"},
+                {"id": ids(), "task": "Give checks", "deadline": "21.12.2018"},
+                {"id": ids(), "task": "Manage", "deadline": "21.12.2018"},
+                {"id": ids(), "task": "Coordinate", "deadline": "21.12.2018"},
+                {"id": ids(), "task": "I sue u", "deadline": "21.12.2018"}];
+            var i;
+            for (i = 0; i < obj.data.length; i++) {
+                obj.data[i].dep = myFactory1.data[i].department;
+                obj.data[i].emp = myFactory2.data[i].empName;
+            }
+            localStorage.setItem("tasks", JSON.stringify(obj.data));
             console.log("if didnt succeed");
 
-
+        }
         return obj;
     }])
 

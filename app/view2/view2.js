@@ -9,12 +9,14 @@ angular.module('myApp.view2', ['ngRoute'])
         });
     }])
 
-    .factory('myFactory2',function departments (){
-        var id = 1;
+    .factory('myFactory2',function (){
+        var id = 0;
         var obj = {};
-        /*var result = JSON.parse(localStorage.getItem("employees"));
-
-        if(result!=null)
+        //var result = JSON.parse(localStorage.getItem("employees"));
+        function ids() {
+            return id++;
+        }
+        /*if(result!=null)
         {
             obj.data = JSON.parse(localStorage.getItem("employees"));
             console.log('IF SUCCEEDED');
@@ -27,19 +29,10 @@ angular.module('myApp.view2', ['ngRoute'])
                 { "empName":"Tyler Lee",     "id":ids(),"dep":"Accounting" },
                 { "empName":"Peter Smith",   "id":ids(),"dep":"Marketing" },
                 { "empName":"Jack Spiker",   "id":ids(),"dep":"Legal Affairs" }];
-
-            var temp = obj.data;
-
-            /*localStorage.setItem("employees", JSON.stringify(temp));
-            console.log("if didnt succeed");
-        }*/
-
+            /*localStorage.setItem("employees", JSON.stringify(obj.data));
+            console.log("if didnt succeed");*/
+        //}
             return obj;
-
-            function ids() {
-                return id++;
-            }
-
     })
 
 
