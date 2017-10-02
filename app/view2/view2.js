@@ -9,33 +9,30 @@ angular.module('myApp.view2', ['ngRoute'])
         });
     }])
 
-    .factory('myFactory2', function departments (){
+    .factory('myFactory2',function departments (){
         var id = 1;
         var obj = {};
-        var result = JSON.parse(localStorage.getItem("employees"));
+        /*var result = JSON.parse(localStorage.getItem("employees"));
 
-
-//if there are no items in local storage departments then we have to populate
         if(result!=null)
         {
             obj.data = JSON.parse(localStorage.getItem("employees"));
             console.log('IF SUCCEEDED');
         }
         else
-        {
-
+        {*/
             obj.data = [
-                {"name": "John Doe", "department": "IT", "id": ids()},
-                {"name": "Catelyn Jones", "department": "HRM", "id": ids()},
-                {"name": "Tyler Lee", "department": "Accounting", "id": ids()},
-                {"name": "Peter Smith", "department": "Marketing", "id": ids()},
-                {"name": "Jack Spiker", "department": "Legal Affairs", "id": ids()}];
+                { "empName":"John Doe",      "id":ids(),"dep":"IT" },
+                { "empName":"Catelyn Jones", "id":ids(),"dep":"HRM" },
+                { "empName":"Tyler Lee",     "id":ids(),"dep":"Accounting" },
+                { "empName":"Peter Smith",   "id":ids(),"dep":"Marketing" },
+                { "empName":"Jack Spiker",   "id":ids(),"dep":"Legal Affairs" }];
 
             var temp = obj.data;
 
-            localStorage.setItem("employees", JSON.stringify(temp));
+            /*localStorage.setItem("employees", JSON.stringify(temp));
             console.log("if didnt succeed");
-        }
+        }*/
 
             return obj;
 
@@ -54,7 +51,7 @@ angular.module('myApp.view2', ['ngRoute'])
         $scope.info = "";
 
         $scope.saveEmployee = function(){
-            if ($scope.newEmployee.name !== undefined && $scope.newEmployee.department!== undefined)
+            if ($scope.newEmployee.empName !== undefined && $scope.newEmployee.department!== undefined)
             {
                 $scope.newEmployee.id = $scope.employees.length+1;
             console.log("Saving...");

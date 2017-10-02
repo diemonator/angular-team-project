@@ -8,52 +8,68 @@ angular.module('myApp.view1', ['ngRoute'])
         });
     }])
 
-    .factory('myFactory1', function departments (){
+    .factory('myFactory1',['myFactory2',function departments (myFactory2){
         var obj = {};
+        var id = 0;
 
-        var result = JSON.parse(localStorage.getItem("departments"));
+        /*var result = JSON.parse(localStorage.getItem("departments"));
 
 
-//if there are no items in local storage departments then we have to populate
+
         if(result!=null)
         {
             obj.data = JSON.parse(localStorage.getItem("departments"));
             console.log('IF SUCCEEDED');
         }
         else
-        {
+        {*/
             obj.data = [
-                {"department":"IT", "location":"Ohio"  },
-                {"department":"HRM", "location":"Indiana"},
-                {"department":"Accounting", "location":"Washington"},
-                {"department":"Marketing", "location":"New York"},
-                {"department":"Legal Affairs", "location":"California"}];
-
-            var temp = obj.data;
-
-            localStorage.setItem("departments",JSON.stringify(temp));
-            console.log("if didn't succeed");
-
+                { "department":"IT",            "location":"Ohio",       "depId":ids() },
+                { "department":"HRM",           "location":"Indiana",    "depId":ids() },
+                { "department":"Accounting",    "location":"Washington", "depId":ids() },
+                { "department":"Marketing",     "location":"New York",   "depId":ids() },
+                { "department":"Legal Affairs", "location":"California", "depId":ids() }];
+        var j =-1;
+        function newProp () {
+            j++;
+            return myFactory2.data[j].empName;
+        }
+        var i;
+        for (i=0;i<obj.data.length;i++)
+        {
+            obj.data[i].emp = newProp();
         }
 
-       /* obj.data = [
-            {"department":"IT", "location":"Ohio", "emp":"John Doe", },
-            {"department":"HRM", "location":"Indiana","emp":"Catelyn Jones"},
-            {"department":"Accounting", "location":"Washington","emp":"Tyler Lee"},
-            {"department":"Marketing", "location":"New York", "emp":"Peter Smith",},
-            {"department":"Legal Affairs", "location":"California", "emp":"Jack Spiker"}];*/
-        return obj;
-    })
+        function ids() {
+            return id++;
+        }
+            /*var temp = obj.data;
 
+            localStorage.setItem("departments",JSON.stringify(temp));
+            console.log("if didnt succeed");
+
+        }*/
+
+        return obj;
+    }])
+
+    /*.directive('myDirective1',function () {
+        return{
+            template:
+            "<tr>"
+            '<td> {{ $index+1 }}.</td>'
+        '<td> {{department.department}} </td>'
+        <td> {{department.emp}}</td>
+        <td>{{department.location}}</td>
+        <td> <button class="btn btn-info btn-sm"  type="button" data-toggle="modal" data-target="#myModalEdit" ng-click="selectDepartment(department)">Edit</button>
+            <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#myModalDelete" data-dismiss="modal" ng-click="deleteDepartment(selectDepartment(department))">Delete</button> </td>
+        </tr>
+        }
+    })*/
 
     .controller('View1Ctrl', [ '$scope','myFactory1', function($scope, myFactory1) {
-        //$scope.saved = localStorage.getItem('save');
         var data = myFactory1.data;
         $scope.departments = data;
-        //alert($scope.saved);
-        //$scope.departments = (localStorage.getItem('save')!==null) ? JSON.stringify($scope.saved) : data;
-        //alert($scope.departments);
-        //localStorage.setItem('save',JSON.stringify($scope.departments));
         console.log("in controller...");
         $scope.newDepartment = {};
         $scope.info = "";
@@ -64,7 +80,6 @@ angular.module('myApp.view1', ['ngRoute'])
                 $scope.departments.push($scope.newDepartment);
                 $scope.info = "New Department Added Successfully!";
                 $scope.newDepartment = {};
-                //localStorage.setItem('save', JSON.stringify($scope.departments));
                 SaveDepartments($scope);
             }
             else {
@@ -88,7 +103,6 @@ angular.module('myApp.view1', ['ngRoute'])
         };
 
         function SaveDepartments($scope) {
-
             localStorage.setItem("departments",JSON.stringify($scope.departments));
         }
 

@@ -2,53 +2,75 @@
 
 angular.module('myApp.view4', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view4', {
-    templateUrl: 'view4/view4.html',
-    controller: 'View4Ctrl'
-  });
-}])
-
-
- .factory('View4Factory',['myFactory1','myFactory2','myFactory3', function dashboard (myFactory1,myFactory2,myFactory3)
-    {
-        var j = -1;
-        var t = -1;
-        var h = -1;
-
-        var returnedData = {};
-        returnedData.data = [];
-        function newProp () {
-            j++;
-            return myFactory1.data[j];
-        }
-        function newPropEmp () {
-            t++;
-            return myFactory2.data[t];
-        }
-        function newPropTask () {
-            h++;
-            return myFactory3.data[h];
-        }
-        for (var i=0;i<myFactory1.data.length;i++)
-        {
-            returnedData.data.push({"id":i});
-            returnedData.data[i].department = newProp();
-            returnedData.data[i].employee = newPropEmp();
-            returnedData.data[i].task = newPropTask();
-        }
-        return returnedData;
+    .config(['$routeProvider', function($routeProvider) {
+        $routeProvider.when('/view4', {
+            templateUrl: 'view4/view4.html',
+            controller: 'View4Ctrl'
+        });
     }])
-.controller('View4Ctrl', [ '$scope','View4Factory', function($scope,View4Factory) {
-    $scope.infos = View4Factory.data;
 
-    $scope.employeeShow = function (index) {
-        window.alert("You clicked "+$scope.infos[index].employee.name+" from department: "+$scope.infos[index].employee.department);
-    }
-    $scope.departmentShow = function (index) {
-        window.alert("You clicked on Department "+$scope.infos[index].department.department+". It is in "+$scope.infos[index].department.location);
-    }
-    $scope.taskShow = function (index) {
-        window.alert("You clicked on task: "+$scope.infos[index].task.task+". It is for: "+$scope.infos[index].task.emp+" and is due by "+$scope.infos[index].task.deadline);
-    }
-}]);
+    .directive('myDirective',function () {
+        return {
+            template: '<table class="table table-striped">\
+            <thead>\
+            <tr>\
+            <th>Employee</th>\
+            <th>Department</th>\
+            <th>Task</th>\
+            <th>Deadline</th>\
+            </tr>\
+            </thead>\
+            <tbody>\
+            <tr>\
+            <td>{{worker}} </td>\
+            <td>{{workPlace}}</td>\
+            <td>{{work}}</td>\
+            <td>{{endDate}}</td>\
+            </tr>\
+            </tbody>\
+            </table>'
+        }
+    })
+
+    .factory('myFactory4',['myFactory1','myFactory2','myFactory3', function (myFactory1,myFactory2,myFactory3)
+    {
+        var id = 0;
+        var obj = {};
+        obj.data = [];
+
+        for (var i=0;i<myFactory3.data.length;i++)
+        {
+            obj.data.push({"id":i});
+            obj.data[i].departmentName = myFactory1.data[i].department;
+            obj.data[i].location = myFactory1.data[i].location;
+            obj.data[i].employee = myFactory2.data[i].empName;
+            obj.data[i].task = myFactory3.data[i].task;
+            obj.data[i].time = myFactory3.data[i].deadline;
+        }
+        function ids() {
+            return id++;
+        }
+        return obj;
+    }])
+
+    .controller('View4Ctrl', [ '$scope','myFactory4', function($scope,myFactory4) {
+        $scope.infos = myFactory4.data;
+
+        $scope.showTask = function (index) {
+            $scope.worker = $scope.infos[index].employee;
+            $scope.workPlace = $scope.infos[index].departmentName;
+            $scope.work = $scope.infos[index].task;
+            $scope.endDate = $scope.infos[index].time;
+    };
+        
+        $scope.showDep = function (index) {
+            $scope.worker = $scope.infos[index].employee;
+            $scope.workPlace = $scope.infos[index].location;
+            $scope.work = $scope.infos[index].departmentName;
+    };
+        
+        $scope.showEmp = function (index) {
+            $scope.worker = $scope.infos[index].employee;
+            $scope.workPlace = $scope.infos[index].departmentName;
+    };
+    }]);

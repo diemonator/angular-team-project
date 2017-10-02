@@ -9,33 +9,55 @@ angular.module('myApp.view3', ['ngRoute'])
         });
     }])
 
-    .factory('myFactory3', function departments (){
+    .factory('myFactory3',['myFactory1','myFactory2', function departments (myFactory1,myFactory2){
         var obj = {};
-        var result = JSON.parse(localStorage.getItem("tasks"));
+        var id = 0;
+        function ids() {
+            return id++;
+        }
+        var v = -1;
+        var j = -1;
+        function newDep () {
+            j++;
+            return myFactory1.data[j].department;
+        }
+        function newEmp () {
+            v++;
+            return myFactory2.data[v].empName;
+        }
+        /*var result = JSON.parse(localStorage.getItem("tasks"));
 
 
-//if there are no items in local storage departments then we have to populate
         if(result!=null)
         {
             obj.data = JSON.parse(localStorage.getItem("tasks"));
             console.log('IF SUCCEEDED');
         }
         else
-        {
+        {*/
+
+
         obj.data = [
-            {"emp":"John Doe", "department":"IT", "task":"Make JS", "deadline":"21.12.2018"},
-            {"emp":"Catelyn Jones", "department":"HRM", "task":"Give checks","deadline":"21.12.2018"},
-            {"emp":"Tyler Lee", "department":"Accounting", "task":"Manage","deadline":"21.12.2018"},
-            {"emp":"Peter Smith", "department":"Marketing", "task":"Coordinate","deadline":"21.12.2018"},
-            {"emp":"Jack Spiker", "department":"Legal Affairs", "task":"I sue u","deadline":"21.12.2018"}];
+            { "id":ids(), "task":"Make JS",     "deadline":"21.12.2018" },
+            { "id":ids(), "task":"Give checks", "deadline":"21.12.2018" },
+            { "id":ids(), "task":"Manage",      "deadline":"21.12.2018" },
+            { "id":ids(), "task":"Coordinate",  "deadline":"21.12.2018" },
+            { "id":ids(), "task":"I sue u",     "deadline":"21.12.2018" }];
             var temp = obj.data;
 
-            localStorage.setItem("tasks",JSON.stringify(temp));
-            console.log("if didn't succeed");
-
+        var i;
+        for (i=0;i<obj.data.length;i++)
+        {
+            obj.data[i].dep = newDep();
+            obj.data[i].emp = newEmp()
         }
+
+            localStorage.setItem("tasks",JSON.stringify(temp));
+            console.log("if didnt succeed");
+
+
         return obj;
-    })
+    }])
 
     .controller('View3Ctrl', [ '$scope','myFactory3', function($scope,myFactory3) {
 

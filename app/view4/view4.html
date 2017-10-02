@@ -1,4 +1,4 @@
-<p> This is the partial for Departments </p>
+<p> This is the partial for Dashboard </p>
 <hr>
 
 <div class="container">
@@ -19,10 +19,12 @@
         <tbody>
         <!-- we use track by index to remove the dupes. dupes are duplucates in ng-repeat -->
         <tr ng-repeat="info in infos">
-            <td ng-click="employeeShow($index)"> {{info.employee.name}}.</td>
-            <td ng-click="departmentShow($index)"> {{info.department.department}} </td>
-            <td ng-click="taskShow($index)"> {{info.task.task}}</td>
+            <td ng-click="showEmp($index)"> {{info.employee}}.</td>
+            <td ng-click="showDep($index)"> {{info.departmentName}} </td>
+            <td ng-click="showTask($index)"> {{info.task}}</td>
         </tr>
         </tbody>
     </table>
+    <br>
+    <my-directive></my-directive>
 </div>
