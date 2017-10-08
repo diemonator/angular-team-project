@@ -11,10 +11,10 @@
     <thead>
     <tr>
       <th>Id</th>
-      <th>Task</th>
-      <th>Employee</th>
       <th>Department</th>
-      <th>Deadline</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Status</th>
       <th>Edit</th>
     </tr>
     </thead>
@@ -31,11 +31,11 @@
     </ul>
 
     <tr ng-repeat="task in tasks | filter: filterValue track by $index">
-      <td> {{ $index+1 }}.</td>
-      <td> {{task.task}} </td>
-      <td>{{task.emp}}</td>
-      <td>{{task.dep}}</td>
-      <td>{{task.deadline}}</td>
+      <td> {{ task.no }}.</td>
+      <td> {{task.deptNo}} </td>
+      <td>{{task.title}}</td>
+      <td>{{task.description}}</td>
+      <td>{{task.status}}</td>
       <td> <button class="btn btn-info btn-sm"  type="button" data-toggle="modal" data-target="#myModalEdit" ng-click="selectTask(task)">Edit</button>
       <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#myModalDelete" data-dismiss="modal" ng-click="deleteTask(selectTask(task))">Delete</button> </td>
     </tr>
@@ -55,28 +55,35 @@
           <div>
             <label for="inputs" class="col-sm-2 control-label">Task</label>
             <div>
-              <input type="text" class="form-control" id="inputs" ng-model="newTask.task">
+              <input type="text" class="form-control" id="inputs" ng-model="newTask.no">
+            </div>
+          </div>
+
+            <div>
+                <label for="inputs" class="col-sm-2 control-label">Department number</label>
+                <div>
+                    <input type="text" class="form-control" id="inputs" ng-model="newTask.deptNo">
+                </div>
+            </div>
+
+          <div>
+            <label for="inputs" class="col-sm-2 control-label">Title</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="newTask.title">
             </div>
           </div>
 
           <div>
-            <label for="inputs" class="col-sm-2 control-label">Employee</label>
+            <label for="inputs" class="col-sm-2 control-label">Description</label>
             <div>
-              <input type="text" class="form-control" id="inputs" ng-model="newTask.emp">
+              <input type="text" class="form-control" id="inputs" ng-model="newTask.description">
             </div>
           </div>
 
           <div>
-            <label for="inputs" class="col-sm-2 control-label">Department</label>
+            <label for="inputs" class="col-sm-2 control-label">Status</label>
             <div>
-              <input type="text" class="form-control" id="inputs" ng-model="newTask.dep">
-            </div>
-          </div>
-
-          <div>
-            <label for="inputs" class="col-sm-2 control-label">Deadline</label>
-            <div>
-              <input type="text" class="form-control" id="inputs" ng-model="newTask.deadline">
+              <input type="text" class="form-control" id="inputs" ng-model="newTask.status">
             </div>
           </div>
 
@@ -107,30 +114,23 @@
       <div>
         <form>
           <div>
-            <label for="inputs" class="col-sm-2 control-label">Task</label>
-            <div>
-              <input type="text" class="form-control" id="inputs" ng-model="clickedTask.task">
-            </div>
-          </div>
-
+          <label for="inputs" class="col-sm-2 control-label">Title</label>
           <div>
-          <label for="inputs" class="col-sm-2 control-label">Employee</label>
-          <div>
-            <input type="text" class="form-control" id="inputs" ng-model="clickedTask.emp">
+            <input type="text" class="form-control" id="inputs" ng-model="clickedTask.title">
           </div>
         </div>
 
           <div>
-            <label for="inputs" class="col-sm-2 control-label">Department</label>
+            <label for="inputs" class="col-sm-2 control-label">Description</label>
             <div>
-              <input type="text" class="form-control" id="inputs" ng-model="clickedTask.dep">
+              <input type="text" class="form-control" id="inputs" ng-model="clickedTask.description">
             </div>
           </div>
 
           <div>
-            <label for="inputs" class="col-sm-2 control-label">Deadline</label>
+            <label for="inputs" class="col-sm-2 control-label">Status</label>
             <div>
-              <input type="text" class="form-control" id="inputs" ng-model="clickedTask.deadline">
+              <input type="text" class="form-control" id="inputs" ng-model="clickedTask.status">
             </div>
           </div>
 

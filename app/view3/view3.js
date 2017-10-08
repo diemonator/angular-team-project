@@ -9,6 +9,14 @@ angular.module('myApp.view3', ['ngRoute'])
         });
     }])
 
+
+    .service('MyService3',['$http',function ($http) {
+        this.getDepartments = function () {
+            return $http.get('http://i874156.iris.fhict.nl/WEB2/tasks');
+        }
+    }])
+
+
     .factory('myFactory3',['myFactory1','myFactory2', function (myFactory1,myFactory2){
         var obj = {};
         var id = 0;
@@ -40,15 +48,21 @@ angular.module('myApp.view3', ['ngRoute'])
         return obj;
     }])
 
-    .controller('View3Ctrl', [ '$scope','myFactory3', function($scope,myFactory3) {
+    .controller('View3Ctrl', [ '$scope','myFactory3', 'MyService3',function($scope,myFactory3,MyService3) {
 
-        $scope.tasks = myFactory3.data;
+        MyService3.getDepartments()
+            .then(function (response) {
+                $scope.tasks = response.data;
+                console.log($scope.tasks);
+            },function (error) {
+                $scope.error = error;
+            });
 
         $scope.newTask = {};
         $scope.info = "";
 
         $scope.saveTask = function(){
-            if ($scope.newTask.emp !== undefined && $scope.newTask.department!== undefined && $scope.newTask.task!==undefined)
+            if ($scope.newTask.title !== undefined && $scope.newTask.no!== undefined && $scope.newTask.deptNo!==undefined)
             {
             console.log("Saving...");
             $scope.tasks.push($scope.newTask);

@@ -7,7 +7,12 @@ angular.module('myApp.view1', ['ngRoute'])
             controller: 'View1Ctrl'
         });
     }])
-
+    
+    .service('MyService1',['$http',function ($http) {
+       this.getDepartments = function () {
+           return $http.get('http://i874156.iris.fhict.nl/WEB2/departments');
+       }
+    }])
     .factory('myFactory1',['myFactory2',function (myFactory2){
         var obj = {};
         var id = 0;
@@ -39,9 +44,14 @@ angular.module('myApp.view1', ['ngRoute'])
         return obj;
     }])
 
-    .controller('View1Ctrl', [ '$scope','myFactory1', function($scope, myFactory1) {
+    .controller('View1Ctrl', [ '$scope','myFactory1', 'MyService1',function($scope, myFactory1,MyService1) {
         var data = myFactory1.data;
-        $scope.departments = data;
+        MyService1.getDepartments()
+            .then(function (response) {
+            $scope.departments = response.data;
+        },function (error) {
+            $scope.error = error;
+        });
         console.log("in controller...");
         $scope.newDepartment = {};
         $scope.info = "";

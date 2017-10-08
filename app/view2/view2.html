@@ -12,8 +12,10 @@
     <thead>
     <tr>
       <th>Id</th>
-      <th>Employee</th>
-      <th>Department</th>
+      <th>DoB</th>
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>Gender</th>
       <th>Edit</th>
     </tr>
     </thead>
@@ -30,9 +32,11 @@
     </ul>
 
     <tr ng-repeat="employee in employees | filter: filterValue track by $index">
-      <td> {{ employee.id }}.</td>
-      <td> {{employee.empName}} </td>
-      <td>{{employee.dep}}</td>
+      <td> {{ employee.no }}.</td>
+      <td> {{employee.birthDate}} </td>
+      <td>{{employee.firstName}}</td>
+      <td>{{employee.lastName}}</td>
+      <td>{{employee.gender}}</td>
       <td> <button class="btn btn-info btn-sm"  type="button" data-toggle="modal" data-target="#myModalEdit" ng-click="selectEmployee(employee)">Edit</button>
       <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#myModalDelete" data-dismiss="modal" ng-click="deleteEmployee(selectEmployee(employee))">Delete</button> </td>
     </tr>
