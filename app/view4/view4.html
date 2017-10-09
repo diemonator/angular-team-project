@@ -7,6 +7,8 @@
         <button type="button" class="close" aria-label="Close"><span aria-hidden="true" ng-click="clearInfo()">&times;</span></button>
         {{info}}
     </div>
+
+
     <table class="table table-striped">
         <thead>
         <tr>
@@ -16,15 +18,31 @@
 
         </tr>
         </thead>
+
+
+
         <tbody>
         <!-- we use track by index to remove the dupes. dupes are duplucates in ng-repeat -->
         <tr ng-repeat="info in infos">
-            <td ng-click="showEmp($index)"> {{info.employee}}.</td>
+            <td ng-click="showEmp($index)"> {{info.employee}}</td>
             <td ng-click="showDep($index)"> {{info.departmentName}} </td>
             <td ng-click="showTask($index)"> {{info.task}}</td>
         </tr>
+
+
+
         </tbody>
     </table>
+
+
+    <tr ng-controller="View4Ctrl">
+        <!-- <td >{{weather}}</td> -->
+        <!-- <td> Weather in London is: {{weather.id}} </td> -->
+        <td> Weather in London is: {{weather.main}} </td>
+        <td> {{weather.description}}</td>
+        <td> {{weather.main.temp}}</td>
+    </tr>
+
     <br>
     <my-directive></my-directive>
 </div>

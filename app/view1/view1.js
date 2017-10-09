@@ -12,6 +12,8 @@ angular.module('myApp.view1', ['ngRoute'])
        this.getDepartments = function () {
            return $http.get('http://i874156.iris.fhict.nl/WEB2/departments');
        }
+
+
     }])
     .factory('myFactory1',['myFactory2',function (myFactory2){
         var obj = {};

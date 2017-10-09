@@ -31,7 +31,13 @@ angular.module('myApp.view4', ['ngRoute'])
             </table>'
         }
     })
+    .service('MyService4',['$http',function ($http) {
+        this.getWeather = function () {
+            return $http.get('https://api.openweathermap.org/data/2.5/weather?q=London&APPID=8ee783ade6c68579678b8e2ca073d450');
+        }
 
+
+    }])
     .factory('myFactory4',['myFactory1','myFactory2','myFactory3', function (myFactory1,myFactory2,myFactory3)
     {
         var id = 0;
@@ -43,7 +49,7 @@ angular.module('myApp.view4', ['ngRoute'])
             obj.data.push({"id":i});
             obj.data[i].departmentName = myFactory1.data[i].department;
             obj.data[i].location = myFactory1.data[i].location;
-            obj.data[i].employee = myFactory2.data[i].empName;
+            //obj.data[i].employee = myFactory2.data[i].empName;
             obj.data[i].task = myFactory3.data[i].task;
             obj.data[i].time = myFactory3.data[i].deadline;
         }
@@ -53,8 +59,17 @@ angular.module('myApp.view4', ['ngRoute'])
         return obj;
     }])
 
-    .controller('View4Ctrl', [ '$scope','myFactory4', function($scope,myFactory4) {
+    .controller('View4Ctrl', [ '$scope','myFactory4','MyService4', function($scope,myFactory4,MyService4) {
         $scope.infos = myFactory4.data;
+
+
+        MyService4.getWeather()
+            .then(function (response) {
+                $scope.weather = response.data;
+                console.log($scope.weather)
+            },function (error) {
+                $scope.error = error;
+            });
 
         $scope.showTask = function (index) {
             $scope.worker = $scope.infos[index].employee;
