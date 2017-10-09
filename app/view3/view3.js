@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp.view3', ['ngRoute'])
-angular.module('myApp.calendar', ['ui.calendar'])
+
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/view3', {
             templateUrl: 'view3/view3.html',
@@ -42,31 +42,13 @@ angular.module('myApp.calendar', ['ui.calendar'])
                 obj.data[i].emp = myFactory2.data[i].empName;
             }
             localStorage.setItem("tasks", JSON.stringify(obj.data));
-            console.log("if didn't succeed");
+            console.log("if didnt succeed");
 
         }
         return obj;
     }])
 
     .controller('View3Ctrl', [ '$scope','myFactory3', 'MyService3',function($scope,myFactory3,MyService3) {
-        $scope.eventSources = [$scope.events];
-        $scope.events = [  {"id":"1","title":"title","start":"2017-10-10","backgroundColor":"green"}];
-        $scope.uiConfig = {
-            calendar: {
-                height: 700,
-                editable: true,
-                header: {
-                    left: 'month basicWeek basicDay agendaWeek agendaDay',
-                    center: 'title',
-                    right: 'today prev,next'
-                },
-                eventClick: function (event) {
-                    $scope.selectedEvent = event;
-                },
-                eventDrop: $scope.alertOnDrop,
-                eventResize: $scope.alertOnResize
-            }
-        }
 
         MyService3.getDepartments()
             .then(function (response) {
