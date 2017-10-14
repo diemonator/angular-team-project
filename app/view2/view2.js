@@ -9,12 +9,6 @@ angular.module('myApp.view2', ['ngRoute'])
         });
     }])
 
-    .service('MyService2',['$http',function ($http) {
-        this.getDepartments = function () {
-            return $http.get('http://i874156.iris.fhict.nl/WEB2/employees');
-        }
-    }])
-
     .factory('myFactory2',function (){
         var id = 0;
         var obj = {};
@@ -22,7 +16,7 @@ angular.module('myApp.view2', ['ngRoute'])
         function ids() {
             return id++;
         }
-        if(result!=null)
+        if(result.length>1)
         {
             obj.data = JSON.parse(localStorage.getItem("employees"));
             console.log('IF SUCCEEDED');
@@ -42,9 +36,9 @@ angular.module('myApp.view2', ['ngRoute'])
     })
 
 
-    .controller('View2Ctrl', [ '$scope','myFactory2', 'MyService2', function($scope,myFactory2,MyService2) {
+    .controller('View2Ctrl', [ '$scope','myFactory2', 'Service', function($scope,myFactory2,Service) {
 
-        MyService2.getDepartments()
+        Service.getAPIinfo('http://i874156.iris.fhict.nl/WEB2/employees')
             .then(function (response) {
                 $scope.employees = response.data;
                 console.log($scope.employees);
@@ -56,9 +50,14 @@ angular.module('myApp.view2', ['ngRoute'])
         $scope.info = "";
 
         $scope.saveEmployee = function(){
-            if ($scope.newEmployee.empName !== undefined && $scope.newEmployee.department!== undefined)
+            if ($scope.newEmployee.no !== undefined
+                && $scope.newEmployee.birthDate!== undefined
+                && $scope.newEmployee.firstName!== undefined
+                && $scope.newEmployee.lastName!== undefined
+                && $scope.newEmployee.gender!== undefined
+                && $scope.newEmployee.hireDate!== undefined)
             {
-                $scope.newEmployee.id = $scope.employees.length+1;
+
             console.log("Saving...");
             $scope.employees.push($scope.newEmployee);
             $scope.info = "New Employee Added Successfully!";

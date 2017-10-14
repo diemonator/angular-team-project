@@ -31,7 +31,7 @@ angular.module('myApp.view4', ['ngRoute'])
             </table>'
         }
     })
-    .service('MyService4',['$http',function ($http) {
+    .service('WeatherService',['$http',function ($http) {
         this.getWeather = function () {
             return $http.get('https://api.openweathermap.org/data/2.5/weather?q=London&APPID=8ee783ade6c68579678b8e2ca073d450');
         }
@@ -59,11 +59,10 @@ angular.module('myApp.view4', ['ngRoute'])
         return obj;
     }])
 
-    .controller('View4Ctrl', [ '$scope','myFactory4','MyService4', function($scope,myFactory4,MyService4) {
+    .controller('View4Ctrl', [ '$scope','myFactory4','WeatherService', function($scope,myFactory4,WeatherService) {
         $scope.infos = myFactory4.data;
 
-
-        MyService4.getWeather()
+        WeatherService.getWeather()
             .then(function (response) {
                 $scope.weather = response.data;
                 console.log($scope.weather)

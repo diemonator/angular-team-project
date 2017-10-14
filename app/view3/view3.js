@@ -9,14 +9,6 @@ angular.module('myApp.view3', ['ngRoute'])
         });
     }])
 
-
-    .service('MyService3',['$http',function ($http) {
-        this.getDepartments = function () {
-            return $http.get('http://i874156.iris.fhict.nl/WEB2/tasks');
-        }
-    }])
-
-
     .factory('myFactory3',['myFactory1','myFactory2', function (myFactory1,myFactory2){
         var obj = {};
         var id = 0;
@@ -48,9 +40,9 @@ angular.module('myApp.view3', ['ngRoute'])
         return obj;
     }])
 
-    .controller('View3Ctrl', [ '$scope','myFactory3', 'MyService3',function($scope,myFactory3,MyService3) {
+    .controller('View3Ctrl', [ '$scope','myFactory3', 'Service',function($scope,myFactory3,Service) {
 
-        MyService3.getDepartments()
+        Service.getAPIinfo('http://i874156.iris.fhict.nl/WEB2/tasks')
             .then(function (response) {
                 $scope.tasks = response.data;
                 console.log($scope.tasks);
@@ -62,7 +54,13 @@ angular.module('myApp.view3', ['ngRoute'])
         $scope.info = "";
 
         $scope.saveTask = function(){
-            if ($scope.newTask.title !== undefined && $scope.newTask.no!== undefined && $scope.newTask.deptNo!==undefined)
+            if ($scope.newTask.no!==undefined
+            &&$scope.newTask.deptNo!==undefined
+                &&$scope.newTask.title!==undefined
+                &&$scope.newTask.description!==undefined
+                &&$scope.newTask.finishedDate!==undefined
+                &&$scope.newTask.modificationDate!==undefined
+                &&$scope.newTask.creatioDate!==undefined)
             {
             console.log("Saving...");
             $scope.tasks.push($scope.newTask);
