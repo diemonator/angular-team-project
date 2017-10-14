@@ -1,4 +1,10 @@
-<p>This is the partial for Employees.</p>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<h1>This is the partial for Employees.</h1>
 
 <hr>
 
@@ -8,7 +14,7 @@
     <button type="button" class="close" aria-label="Close"><span aria-hidden="true" ng-click="clearInfo()">&times;</span></button>
     {{info}}
   </div>
-  <table class="table table-striped">
+  <table class="table table-condensed">
     <thead>
     <tr>
       <th>Id</th>
@@ -32,11 +38,12 @@
     </ul>
 
     <tr ng-repeat="employee in employees | filter: filterValue track by $index">
-      <td> {{ employee.no }}.</td>
+      <td> {{employee.no }}.</td>
       <td> {{employee.birthDate}} </td>
       <td>{{employee.firstName}}</td>
       <td>{{employee.lastName}}</td>
       <td>{{employee.gender}}</td>
+      <td>{{employee.hireDate}}</td>
       <td> <button class="btn btn-info btn-sm"  type="button" data-toggle="modal" data-target="#myModalEdit" ng-click="selectEmployee(employee)">Edit</button>
       <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#myModalDelete" data-dismiss="modal" ng-click="deleteEmployee(selectEmployee(employee))">Delete</button> </td>
     </tr>
@@ -54,16 +61,40 @@
       <div>
         <form>
           <div>
-            <label for="inputs" class="col-sm-2 control-label">Employee Name</label>
+            <label for="inputs" class="col-sm-2 control-label">Employee No</label>
             <div>
-              <input type="text" class="form-control" id="inputs" ng-model="newEmployee.empName">
+              <input type="text" class="form-control" id="inputs" ng-model="newEmployee.no">
             </div>
           </div>
 
           <div>
-            <label for="inputs" class="col-sm-2 control-label">Department</label>
+            <label for="inputs" class="col-sm-2 control-label">Employee Birth Date</label>
             <div>
-              <input type="text" class="form-control" id="inputs" ng-model="newEmployee.dep">
+              <input type="text" class="form-control" id="inputs" ng-model="newEmployee.birthDate">
+            </div>
+          </div>
+          <div>
+            <label for="inputs" class="col-sm-2 control-label">Employee First Name</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="newEmployee.firstName">
+            </div>
+          </div>
+          <div>
+            <label for="inputs" class="col-sm-2 control-label">Employee Last Name</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="newEmployee.lastName">
+            </div>
+          </div>
+          <div>
+            <label for="inputs" class="col-sm-2 control-label">Employee Gender</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="newEmployee.gender">
+            </div>
+          </div>
+          <div>
+            <label for="inputs" class="col-sm-2 control-label">Employee hireDate</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="newEmployee.hireDate">
             </div>
           </div>
 
@@ -95,16 +126,40 @@
       <div>
         <form>
           <div>
-            <label for="inputs" class="col-sm-2 control-label">Employee Name</label>
+            <label for="inputs" class="col-sm-2 control-label">Employee No</label>
             <div>
-              <input type="text" class="form-control" id="inputs" ng-model="clickedEmployee.empName">
+              <input type="text" class="form-control" id="inputs" ng-model="clickedEmployee.no">
             </div>
           </div>
 
           <div>
-            <label for="inputs" class="col-sm-2 control-label">Department</label>
+            <label for="inputs" class="col-sm-2 control-label">Employee Birth Date</label>
             <div>
-              <input type="text" class="form-control" id="inputs" ng-model="clickedEmployee.dep">
+              <input type="text" class="form-control" id="inputs" ng-model="clickedEmployee.birthDate">
+            </div>
+          </div>
+          <div>
+            <label for="inputs" class="col-sm-2 control-label">Employee First Name</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="clickedEmployee.firstName">
+            </div>
+          </div>
+          <div>
+            <label for="inputs" class="col-sm-2 control-label">Employee Last Name</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="clickedEmployee.lastName">
+            </div>
+          </div>
+          <div>
+            <label for="inputs" class="col-sm-2 control-label">Employee Gender</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="clickedEmployee.gender">
+            </div>
+          </div>
+          <div>
+            <label for="inputs" class="col-sm-2 control-label">Employee hireDate</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="clickedEmployee.hireDate">
             </div>
           </div>
 

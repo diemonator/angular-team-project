@@ -1,4 +1,10 @@
-<p>This is the partial for Tasks.</p>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<h1>This is the partial for Tasks.</h1>
 <hr>
 
 <div class="container">
@@ -7,15 +13,17 @@
     <button type="button" class="close" aria-label="Close"><span aria-hidden="true" ng-click="clearInfo()">&times;</span></button>
     {{info}}
   </div>
-  <table class="table table-striped">
+  <table class="table table-border">
     <thead>
     <tr>
       <th>Id</th>
       <th>Department</th>
       <th>Title</th>
       <th>Description</th>
-      <th>Status</th>
-      <th>Edit</th>
+      <th>Finsihed Date</th>
+      <th>Modification Date</th>
+      <th>Creatio Date</th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
@@ -35,7 +43,9 @@
       <td> {{task.deptNo}} </td>
       <td>{{task.title}}</td>
       <td>{{task.description}}</td>
-      <td>{{task.status}}</td>
+      <td>{{task.finishedDate}}</td>
+      <td>{{task.modificationDate}}</td>
+      <td>{{task.creatioDate}}</td>
       <td> <button class="btn btn-info btn-sm"  type="button" data-toggle="modal" data-target="#myModalEdit" ng-click="selectTask(task)">Edit</button>
       <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#myModalDelete" data-dismiss="modal" ng-click="deleteTask(selectTask(task))">Delete</button> </td>
     </tr>
@@ -81,9 +91,21 @@
           </div>
 
           <div>
-            <label for="inputs" class="col-sm-2 control-label">Status</label>
+            <label for="inputs" class="col-sm-2 control-label">Finsihed Date</label>
             <div>
-              <input type="text" class="form-control" id="inputs" ng-model="newTask.status">
+              <input type="text" class="form-control" id="inputs" ng-model="newTask.finishedDate">
+            </div>
+          </div>
+          <div>
+            <label for="inputs" class="col-sm-2 control-label">Modification date</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="newTask.modificationDate">
+            </div>
+          </div>
+          <div>
+            <label for="inputs" class="col-sm-2 control-label">Creatio date</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="newTask.creatioDate">
             </div>
           </div>
 
@@ -114,11 +136,25 @@
       <div>
         <form>
           <div>
-          <label for="inputs" class="col-sm-2 control-label">Title</label>
-          <div>
-            <input type="text" class="form-control" id="inputs" ng-model="clickedTask.title">
+            <label for="inputs" class="col-sm-2 control-label">Task</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="clickedTask.no">
+            </div>
           </div>
-        </div>
+
+          <div>
+            <label for="inputs" class="col-sm-2 control-label">Department number</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="clickedTask.deptNo">
+            </div>
+          </div>
+
+          <div>
+            <label for="inputs" class="col-sm-2 control-label">Title</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="clickedTask.title">
+            </div>
+          </div>
 
           <div>
             <label for="inputs" class="col-sm-2 control-label">Description</label>
@@ -128,9 +164,21 @@
           </div>
 
           <div>
-            <label for="inputs" class="col-sm-2 control-label">Status</label>
+            <label for="inputs" class="col-sm-2 control-label">Finsihed Date</label>
             <div>
-              <input type="text" class="form-control" id="inputs" ng-model="clickedTask.status">
+              <input type="text" class="form-control" id="inputs" ng-model="clickedTask.finishedDate">
+            </div>
+          </div>
+          <div>
+            <label for="inputs" class="col-sm-2 control-label">Modification date</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="clickedTask.modificationDate">
+            </div>
+          </div>
+          <div>
+            <label for="inputs" class="col-sm-2 control-label">Creatio date</label>
+            <div>
+              <input type="text" class="form-control" id="inputs" ng-model="clickedTask.creatioDate">
             </div>
           </div>
 
