@@ -7,7 +7,24 @@
 <h1> This is the partial for Dashboard </h1>
 <hr>
 
+<tr ng-controller="View4Ctrl">
+    <!-- <td >{{weather}}</td> -->
+    <!-- <td> Weather in London is: {{weather.id}} </td> -->
+    <td> Temperature in London is: </td>
+    <td> {{weather.main.description}}</td>
+    <td> {{weather.main.temp}}</td>
+</tr>
+
+<my-directive></my-directive>
+<my-directive1></my-directive1>
+<my-directive2></my-directive2>
+
+
+
 <div class="container">
+
+
+
 
     <div class="alert alert-info alert-dismissible" role="alert" ng-if="info">
         <button type="button" class="close" aria-label="Close"><span aria-hidden="true" ng-click="clearInfo()">&times;</span></button>
@@ -15,38 +32,46 @@
     </div>
 
 
-    <table class="table table-hover">
+    <div class="col-sm-4" width="100%">
+    <table>
         <thead>
-        <tr>
-            <th>Employee</th>
-            <th>Department</th>
-            <th>Task</th>
-
-        </tr>
+        <tr>Departments</tr>
         </thead>
+        <tr ng-repeat="data in department track by $index">
+            <td ng-click="showDepartment($index+1)"> {{data.name}} </td>
 
-        <tbody>
-        <!-- we use track by index to remove the dupes. dupes are duplucates in ng-repeat -->
-        <tr ng-repeat="info in infos">
-            <td ng-click="showEmp($index)"> {{info.employee}}</td>
-            <td ng-click="showDep($index)"> {{info.departmentName}} </td>
-            <td ng-click="showTask($index)"> {{info.task}}</td>
         </tr>
-
-
-
-        </tbody>
     </table>
+    </div>
 
-
-    <tr ng-controller="View4Ctrl">
-        <!-- <td >{{weather}}</td> -->
-        <!-- <td> Weather in London is: {{weather.id}} </td> -->
-        <td> Temperature in London is: </td>
-        <td> {{weather.main.description}}</td>
-        <td> {{weather.main.temp}}</td>
+    <div class="col-sm-4">
+    <table>
+        <thead>
+        <tr>Employees</tr>
+        </thead>
+    <tr ng-repeat="data in employee" track by $index>
+        <td ng-click="showEmployee($index+10001)"> {{data.lastName}} </td>
     </tr>
+    </table>
+    </div>
+
+    <div class="col-sm-4">
+    <table>
+        <thead>
+        <tr>Tasks</tr>
+        </thead>
+    <tr  ng-repeat="data in task" track by $index>
+        <td ng-click="showTask($index+1)"> {{data.title}} </td>
+    </tr>
+    </table>
+    </div>
 
     <br>
+
+<div class="col-sm-8">
+
+
+
+</div>
 
 </div>
